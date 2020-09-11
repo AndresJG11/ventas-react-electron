@@ -16,14 +16,14 @@ ReactDOM.render(
 	<div>
 	<Router>
 		<ul style={{backgroundColor: "white"}}>
-			<li> <Link to="/home"> App </Link></li>
+			<li> <Link to="/app"> App </Link></li>
 			<li> <Link to="/verproductos"> Ver Productos  </Link></li>
 			<li> <Link to="/login"> Login  </Link></li>
 			<li> <Link to="/generar-reporte"> Generar Reporte  </Link></li>
 			<li> <Link to="/vender"> Vender  </Link></li>
 		</ul>
 		<Switch>
-			<Route exact history={history}  path='/home' component={App} />
+			<Route exact history={history}  path='/app' component={App} />
 			<Route history={history}  path='/login' component={Login} />
 			<Route exact history={history}  path='/verproductos' component={VerProductos} />
 			<Route exact history={history}  path='/generar-reporte' component={GenerarReporte} />

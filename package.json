@@ -30,15 +30,18 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "sqlite3": "^5.0.0",
     "typescript": "~3.7.2",
     "wait-on": "^5.2.0"
   },
-  "devDependencies":{
+  "devDependencies": {
     "electron": "^10.1.1",
-    "electron-builder": "^22.8.0"
+    "electron-builder": "^22.8.0",
+    "electron-rebuild": "^2.0.3"
   },
   "scripts": {
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "rebuild-sqlite3": "electron-rebuild -f -w sqlite3",
     "build": "yarn react-build && yarn electron-build",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
