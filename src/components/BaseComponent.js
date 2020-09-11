@@ -20,7 +20,7 @@ class BaseComponent extends Component{
 
 	componentDidMount() {
 		if(!BaseComponent.isLogged){
-			this.redirectTo("/login", "/login");
+			//this.redirectTo("/login", "/login");
 		}
 	}
 
