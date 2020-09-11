@@ -34,7 +34,9 @@ const data = simularProductos(10);*/
 
 class VerProductos extends BaseComponent {
     constructor(props) {
-        super(props);
+		super(props);
+		
+		console.log("VerProductos")
 
         this.state = { searchTable: '', isModalOpen: false }
 

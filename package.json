@@ -12,6 +12,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@react-pdf/renderer": "^1.6.11",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -20,7 +22,6 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "cross-env": "^7.0.2",
-    "electron": "^10.1.1",
     "electron-is-dev": "^1.2.0",
     "history": "^5.0.0",
     "node-sass": "^4.14.1",
@@ -32,15 +33,19 @@
     "typescript": "~3.7.2",
     "wait-on": "^5.2.0"
   },
+  "devDependencies":{
+    "electron": "^10.1.1",
+    "electron-builder": "^22.8.0"
+  },
   "scripts": {
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "build": "yarn react-build && yarn electron-build",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test --env=jsdom",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "release": "yarn react-build && electron-builder --publish=always",
-    "build": "yarn react-build && yarn electron-build"
+    "release": "yarn react-build && electron-builder --publish=always"
   },
   "eslintConfig": {
     "extends": "react-app"
