@@ -4,6 +4,9 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
 
+const {sqlite3} = require('sqlite3')
+const Promise = require('bluebird');
+
 require('./main.js');
 
 

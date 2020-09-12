@@ -4,6 +4,12 @@ import BaseComponent from '../components/BaseComponent';
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Promise from "bluebird";
+
+const AppDAO = require('../db/dao').default
+const Crud = require('../db/crud').default
+
+
 
 class Login extends BaseComponent {
 	constructor(props) {
@@ -15,14 +21,80 @@ class Login extends BaseComponent {
 		this.onClickLogin = this.onClickLogin.bind(this);
 		this.handleShowPassword = this.handleShowPassword.bind(this);
 		this.state = { showPassword: false }
+
+		this.state = {
+            items: []
+        };
+
+		this.setDatabase();
+		//this.loadData();
+
+		
+	}
+	
+	componentDidMount(){
+		this.addItem();
 	}
 
+	setDatabase() {
+        this.dao = new AppDAO('./database.sqlite3');
+        this.db = new Crud(this.dao);
+        this.db.createTable()
+            .then(() => {
+                console.log('db is created...')
+            })
+            .catch((err) => {
+                console.log('Error: ')
+                console.log(JSON.stringify(err))
+            });
+	}
 
+	loadData() {
+		var getAllData = this.db.getAll();
+		 
+        Promise.all(getAllData).then((data) => {
+            console.log("data:", data);
+            this.loadItem(data);
+        }).catch( (err) => console.log(err) )
+	}
+	
+	loadItem(data) {
+        Object.keys(data).forEach((item) => {
+            var newItem = {
+                text: data[item].user,
+                key: data[item].password
+            };
+ 
+            this.setState((prevState) => {
+                return {
+                    items: prevState.items.concat(newItem)
+                };
+            });
+        });
+	}
+	
+	addItem(e) {
+        if (true) {
+            var newItem = {
+				user: 'andres',
+				password: 'jimenez',
+                key: Date.now()
+            };
+ 
+            this.db.insert(newItem.user, newItem.password, newItem.key);
+            //this._inputElement.value = "";
+        }
+  
+        //e.preventDefault();
+    }
+	
 	async onClickLogin(e) {
 		e.preventDefault()
 		let username = this.email_login.current.value;
 		let pass = this.password_login.current.value;
 		var self = this;
+
+		this.loadData();
 
 		/*
 		const ipcRenderer = electron.ipcRenderer || false;
